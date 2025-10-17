@@ -1,5 +1,4 @@
 import os
-from flask_admin import Admin
 from models import db, User, Planet, Character, Fav, Weapon
 from flask_admin.contrib.sqla import ModelView
 
