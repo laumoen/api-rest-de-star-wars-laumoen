@@ -11,6 +11,7 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 db_url = os.getenv("DATABASE_URL")
+
 if db_url is not None:
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url.replace(
         "postgres://", "postgresql://")
@@ -30,7 +31,7 @@ def handle_invalid_usage(error):
 
 
 @app.route('/')
-def starwars():
+def StarWarsAPI():
     return jsonify({"mensaje": "welcome to the api far far away! :)"})
 
 
@@ -45,7 +46,7 @@ def post_character():
     data = request.get_json()
     required_fields = ["name", "last_name", "race", "native_planet", "is_jedi"]
     if not all(field in data for field in required_fields):
-        return jsonify({"error": "Faltan campos obligatorios"}), 400
+        return jsonify({"error": "compulsory fields are missing... :("}), 400
 
     new_character = Character(
         name=data["name"],
@@ -72,7 +73,7 @@ def post_planet():
     data = request.get_json()
     required_fields = ["name", "solar_system"]
     if not all(field in data for field in required_fields):
-        return jsonify({"error": "Faltan campos obligatorios"}), 400
+        return jsonify({"error": "compulsory fields are missing... :("}), 400
 
     new_planet = Planet(
         name=data["name"],
@@ -96,7 +97,7 @@ def post_weapon():
     data = request.get_json()
     required_fields = ["type", "name", "is_lethal", "weapon_owner_id"]
     if not all(field in data for field in required_fields):
-        return jsonify({"error": "Faltan campos obligatorios"}), 400
+        return jsonify({"error": "compulsory fields are missing... :("}), 400
 
     new_weapon = Weapon(
         type=data["type"],
